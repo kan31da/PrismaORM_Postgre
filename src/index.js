@@ -39,18 +39,29 @@ import { prisma } from "./lib/prisma.js";
 // });
 
 
-const students = await prisma.student.findMany();
-const teacher = await prisma.teacher.findFirst();
+// const students = await prisma.student.findMany();
+// const teacher = await prisma.teacher.findFirst();
 
-await prisma.teacher.update({
-    where: { id: teacher.id },
-    data: {
-        students: {
-            connect: students.map(s => ({ id: s.id }))
-        }
-    }
+// await prisma.teacher.update({
+//     where: { id: teacher.id },
+//     data: {
+//         students: {
+//             connect: students.map(s => ({ id: s.id }))
+//         }
+//     }
+// });
+
+
+// const updatedTeacher = await prisma.teacher.findMany();
+// console.log(updatedTeacher);
+
+const test = await prisma.student.findFirst({
+    where: {
+        id: 1,
+    }, select: {
+        firstName: true,
+        lastName: true,
+    },
 });
 
-
-const updatedTeacher = await prisma.teacher.findMany();
-console.log(updatedTeacher);
+console.log(test);
