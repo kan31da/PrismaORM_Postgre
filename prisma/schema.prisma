@@ -23,5 +23,17 @@ model Student {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
+    teacher   Teacher? @relation(fields: [teacherId], references: [id])
+    teacherId Int?
+
     @@map("students")
+}
+
+model Teacher {
+    id       Int       @id @default(autoincrement())
+    name     String
+
+    students Student[]
+
+     @@map("teachers")
 }
